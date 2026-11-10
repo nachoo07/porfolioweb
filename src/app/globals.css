@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+/* Manual de marca — Mate & Código.
+   Estética editorial: beige + tinta + acento naranja. */
+@theme {
+  --color-beige: #f0ede5;
+  --color-tinta: #111110;
+  --color-naranja: #ee5a3f;
+  --color-rojo-oscuro: #9f2d1c;
+
+  --color-background: #f0ede5;
+  --color-foreground: #111110;
+
+  --font-display: var(--font-bricolage), system-ui, sans-serif;
+  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Compensa el header fijo al saltar a un ancla. */
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  font-weight: 500;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+/* Marquee de capacidades: se desplaza en bucle y se pausa al hover. */
+@keyframes capability-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.capability-marquee-track {
+  animation: capability-marquee 30s linear infinite;
+}
+
+.capability-marquee:hover .capability-marquee-track {
+  animation-play-state: paused;
+}
+
+/* Acordeón de FAQ (Radix): anima la altura al abrir/cerrar. */
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+.animate-accordion-down {
+  animation: accordion-down 300ms ease-out;
+}
+
+.animate-accordion-up {
+  animation: accordion-up 300ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .capability-marquee-track {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
